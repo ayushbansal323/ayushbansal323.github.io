@@ -1,357 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm Sorry ❤️</title>
 
-<title>Rakhi, Ayush has something for you ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+      line-height: 1.6;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
 
-<style>
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    h1, h2 {
+      text-align: center;
+      color: #e63946;
+    }
 
-body{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#ff6a88,#ff99ac);
-color:white;
-overflow:hidden;
-text-align:center;
-padding:20px;
-}
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
 
-/* FLOATING HEARTS */
-body::before{
-content:"❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️ ❤️";
-position:absolute;
-font-size:22px;
-opacity:0.15;
-animation:float 20s linear infinite;
-white-space:nowrap;
-}
+    h2 {
+      margin-top: 0;
+    }
 
-@keyframes float{
-from{transform:translateY(100vh);}
-to{transform:translateY(-120vh);}
-}
+    p {
+      font-size: 1.1rem;
+    }
 
-.container{
-max-width:760px;
-width:90%;
-padding:40px;
-animation:fade .8s ease;
-}
+    .heart {
+      text-align: center;
+      font-size: 2rem;
+      margin: 20px 0;
+    }
 
-@keyframes fade{
-from{opacity:0; transform:translateY(15px);}
-to{opacity:1; transform:translateY(0);}
-}
+    .promise-list li {
+      margin-bottom: 10px;
+    }
 
-h1{
-font-size:2.2rem;
-margin-bottom:20px;
-line-height:1.35;
-}
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
 
-p{
-font-size:1.1rem;
-margin-bottom:22px;
-line-height:1.6;
-}
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: #e63946;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-button{
-padding:15px 34px;
-border:none;
-border-radius:14px;
-font-size:1.05rem;
-cursor:pointer;
-margin:10px;
-}
+    .btn:hover {
+      background: #d62839;
+    }
 
-/* smoother scaling */
-.yes{
-background:#00ffb3;
-color:#222;
-font-weight:700;
-transition: transform 0.2s ease;
-}
-
-.no{
-background:white;
-color:#333;
-position:absolute;
-}
-
-button:hover{
-transform:scale(1.05);
-}
-
-.hidden{
-display:none;
-}
-
-.progress-bar{
-width:100%;
-height:18px;
-background:rgba(255,255,255,0.3);
-border-radius:20px;
-overflow:hidden;
-margin-top:30px;
-}
-
-.progress{
-height:100%;
-width:0%;
-background:white;
-}
-
-.result-line{
-margin:12px 0;
-}
-
-.date-card{
-background:white;
-color:#333;
-padding:18px;
-border-radius:16px;
-margin:12px;
-cursor:pointer;
-transition:.25s;
-}
-
-.date-card:hover{
-transform:scale(1.06);
-}
-
-/* FIXED TYPEWRITER */
-.typewriter{
-border-right:3px solid white;
-white-space:normal;
-display:inline-block;
-max-width:100%;
-word-break:break-word;
-}
-
-</style>
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- SCAN -->
-<div class="container" id="scan">
-
-<h1>Ayush's AI Love Lab 🤖</h1>
-<p>Calibrating love algorithms...</p>
-
-<div class="progress-bar">
-<div class="progress" id="progress"></div>
-</div>
-
-</div>
-
-
-<!-- RESULTS -->
-<div class="container hidden" id="results">
-
-<h1>Compatibility Results 💘</h1>
-
-<div class="result-line">✔ Beauty — dangerously distracting</div>
-<div class="result-line">✔ Humor — laughs at Ayush's bad jokes</div>
-<div class="result-line">✔ Patience — handles Ayush without uninstalling him</div>
-<div class="result-line">⚠ Hoodie theft probability: 97%</div>
-<div class="result-line">⚠ Biting tendency detected — Ayush accepts the risk</div>
-
-<button class="yes" onclick="showProposal()">Continue →</button>
-
-</div>
-
-
-<!-- PROPOSAL -->
-<div class="container hidden" id="proposal">
-
-<h1 id="typeText" class="typewriter"></h1>
-
-<br><br>
-
-<button class="yes" id="yesBtn">YES 😍</button>
-<button class="no" id="noBtn">NO 🙄</button>
-
-</div>
-
-
-<!-- CELEBRATION -->
-<div class="container hidden" id="celebrate">
-
-<h1>You just made Ayush extremely happy 🎉</h1>
-
-<p>Elite decision-making detected.</p>
-
-<button class="yes" onclick="showDates()">One More Thing →</button>
-
-</div>
-
-
-<!-- OPTIONS -->
-<div class="container hidden" id="dates">
-
-<h1>So… what would make us smile next? 🙂</h1>
-<p>Choose one… we’re doing it the next time we meet.</p>
-
-<div class="date-card" onclick="finalScreen('Unlimited Hugs 🤗')">
-🤗 Claim Unlimited Hugs From Ayush
-</div>
-
-<div class="date-card" onclick="finalScreen('A Marine Drive Walk, Your Hand In Mine 🌊')">
-🌊 A Marine Drive Walk, Your Hand In Mine
-</div>
-
-<div class="date-card" onclick="finalScreen('You Feeding Ayush With Your Hands 🥺')">
-🥺 You Feeding Ayush With Your Hands
-</div>
-
-<div class="date-card" onclick="finalScreen('Falling Asleep On Ayush’s Shoulder 😴')">
-😴 Falling Asleep On Ayush’s Shoulder
-</div>
-
-</div>
-
-
-
-<script>
-
-/* SCAN */
-let progress=document.getElementById("progress");
-let width=0;
-
-let interval=setInterval(()=>{
-width+=4;
-progress.style.width=width+"%";
-
-if(width>=100){
-clearInterval(interval);
-setTimeout(()=>{
-scan.classList.add("hidden");
-results.classList.remove("hidden");
-},400);
-}
-},90);
-
-
-/* TYPEWRITER */
-function typeWriter(text,element,speed=40){
-let i=0;
-
-function typing(){
-if(i<text.length){
-element.innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,speed);
-}
-}
-typing();
-}
-
-function showProposal(){
-results.classList.add("hidden");
-proposal.classList.remove("hidden");
-
-typeWriter(
-"Rakhi... will you be Ayush's Valentine and officially earn lifetime hoodie access? ❤️",
-document.getElementById("typeText")
-);
-
-moveNo();
-}
-
-
-/* NO BUTTON + FAST YES GROWTH */
-let noBtn=document.getElementById("noBtn");
-let yesBtn=document.getElementById("yesBtn");
-
-let scale=1;
-
-let texts=[
-"You misclicked 🙂",
-"Nice try 😂",
-"Ayush will cry 😭",
-"Illegal move",
-"Destiny says YES"
-];
-
-function moveNo(){
-
-function growYes(){
-scale+=0.12;
-yesBtn.style.transform=`scale(${scale})`;
-}
-
-noBtn.addEventListener("mouseover",()=>{
-
-let x=Math.random()*(window.innerWidth-150);
-let y=Math.random()*(window.innerHeight-80);
-
-noBtn.style.left=x+"px";
-noBtn.style.top=y+"px";
-
-noBtn.innerText=texts[Math.floor(Math.random()*texts.length)];
-
-growYes();
-});
-
-noBtn.addEventListener("click",growYes);
-}
-
-
-/* YES */
-yesBtn.addEventListener("click",()=>{
-proposal.classList.add("hidden");
-celebrate.classList.remove("hidden");
-
-confetti({
-particleCount:300,
-spread:120,
-origin:{y:.6}
-});
-});
-
-
-function showDates(){
-celebrate.classList.add("hidden");
-dates.classList.remove("hidden");
-
-confetti({particleCount:150,spread:100});
-}
-
-
-/* AUTO WHATSAPP */
-function finalScreen(choice){
-
-confetti({
-particleCount:220,
-spread:110
-});
-
-let msg = encodeURIComponent(
-"Hey Ayush ❤️ I choose this for us: " + choice
-);
-
-setTimeout(()=>{
-window.open("https://wa.me/?text="+msg);
-},600);
-
-}
-
-</script>
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="card">
+      <h1>I'm Sorry ❤️</h1>
+      <p style="text-align:center;">
+        This page exists because you matter more to me than my ego,
+        my excuses, or my mistakes.
+      </p>
+      <div class="heart">💔 ➜ ❤️</div>
+    </div>
+
+    <!-- WHAT HAPPENED -->
+    <div class="card">
+      <h2>What I Did Wrong</h2>
+      <p>
+        I know I hurt you.  
+        I didn’t listen the way I should have.  
+        I took things lightly when they meant everything to you.
+      </p>
+      <p>
+        I’m not writing this to defend myself —
+        I’m writing this because I genuinely understand my mistake.
+      </p>
+    </div>
+
+    <!-- WHAT YOU MEAN -->
+    <div class="card">
+      <h2>What You Mean to Me</h2>
+      <p>
+        You’re not just someone I love —  
+        you’re my comfort, my calm, my chaos, and my home.
+      </p>
+      <p>
+        Losing you, even emotionally, scared me in ways I can’t fully explain.
+      </p>
+    </div>
+
+    <!-- PROMISES -->
+    <div class="card">
+      <h2>My Promises (Not Just Words)</h2>
+      <ul class="promise-list">
+        <li>❤️ I will listen — fully, patiently, without interrupting.</li>
+        <li>❤️ I will communicate instead of assuming.</li>
+        <li>❤️ I will respect your feelings even when I don’t fully understand them.</li>
+        <li>❤️ I will choose you, every single day.</li>
+      </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="card" style="text-align:center;">
+      <h2>One Honest Request</h2>
+      <p>
+        I’m not asking you to forgive me instantly.  
+        I’m just asking for a conversation… when you’re ready.
+      </p>
+
+      <a href="tel:+91XXXXXXXXXX" class="btn">Talk to Me ❤️</a>
+    </div>
+
+    <div class="footer">
+      Made with sincerity, not perfection.
+    </div>
+
+  </div>
 
 </body>
 </html>
