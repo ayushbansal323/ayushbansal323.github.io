@@ -19,7 +19,7 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -27,6 +27,7 @@ background:linear-gradient(135deg,#ff6a88,#ff99ac);
 color:white;
 overflow:hidden;
 text-align:center;
+padding:20px;
 }
 
 /* FLOATING HEARTS */
@@ -46,6 +47,7 @@ to{transform:translateY(-120vh);}
 
 .container{
 max-width:760px;
+width:90%;
 padding:40px;
 animation:fade .8s ease;
 }
@@ -56,20 +58,22 @@ to{opacity:1; transform:translateY(0);}
 }
 
 h1{
-font-size:2.4rem;
+font-size:2.2rem;
 margin-bottom:20px;
+line-height:1.35;
 }
 
 p{
-font-size:1.15rem;
-margin-bottom:25px;
+font-size:1.1rem;
+margin-bottom:22px;
+line-height:1.6;
 }
 
 button{
 padding:15px 34px;
 border:none;
 border-radius:14px;
-font-size:1.1rem;
+font-size:1.05rem;
 cursor:pointer;
 margin:10px;
 }
@@ -129,11 +133,13 @@ transition:.25s;
 transform:scale(1.06);
 }
 
+/* FIXED TYPEWRITER */
 .typewriter{
 border-right:3px solid white;
-white-space:nowrap;
-overflow:hidden;
+white-space:normal;
 display:inline-block;
+max-width:100%;
+word-break:break-word;
 }
 
 </style>
@@ -242,7 +248,7 @@ results.classList.remove("hidden");
 
 
 /* TYPEWRITER */
-function typeWriter(text,element,speed=45){
+function typeWriter(text,element,speed=40){
 let i=0;
 
 function typing(){
@@ -268,7 +274,7 @@ moveNo();
 }
 
 
-/* NO BUTTON + FASTER YES GROWTH */
+/* NO BUTTON + FAST YES GROWTH */
 let noBtn=document.getElementById("noBtn");
 let yesBtn=document.getElementById("yesBtn");
 
@@ -285,7 +291,7 @@ let texts=[
 function moveNo(){
 
 function growYes(){
-scale+=0.12; // faster growth
+scale+=0.12;
 yesBtn.style.transform=`scale(${scale})`;
 }
 
